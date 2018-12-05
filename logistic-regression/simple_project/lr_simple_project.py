@@ -15,7 +15,7 @@ def sigmoid(input_value):
     output_value = 1.0 / (1 + np.exp(-input_value))
     return output_value
 
-def gradient_descent(data_matrix, label_vector):
+def gradient_ascent(data_matrix, label_vector):
     m, n = data_matrix.shape
     weights = np.ones((n))
     alpha = 0.001
@@ -40,7 +40,7 @@ def visualize(data_matrix, label_vector, weights):
             xcord1.append(data_matrix[i][1])
             ycord1.append(data_matrix[i][2])
    
-    plt.switch_backend("PDF")
+    plt.switch_backend("agg")
     fig = plt.figure()
     ax = fig.add_subplot(111)
     ax.scatter(xcord0, ycord0, s = 30, c = "red", marker = "o", alpha = 1, label = "0")
@@ -51,15 +51,14 @@ def visualize(data_matrix, label_vector, weights):
     ax.set_xlabel("x1")
     ax.set_ylabel("x2")
     plt.legend()
-    plt.savefig("_1_2.pdf")
+    plt.savefig("data_visualize.png")
     plt.close()
 
 
 if __name__ == "__main__":
     data_path = "testSet.txt"
-    load_data(data_path)
     data_matrix, label_vector = load_data(data_path)
-    weights = gradient_descent(data_matrix, label_vector)
+    weights = gradient_ascent(data_matrix, label_vector)
     visualize(data_matrix, label_vector, weights)
 
 
